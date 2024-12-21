@@ -1,8 +1,21 @@
-import { useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
+import fetchJobs from './services/jobs';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    console.log('Jobs found:', jobs)
+  }, [jobs]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await (fetchJobs())
+      setJobs(data)
+    }
+    loadData()
+  }, []);
 
   return (
     <>
