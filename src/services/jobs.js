@@ -1,13 +1,16 @@
 import axios from "axios";
-
-const BASE_URL = `${import.meta.env.VITE_BASE_URL}/works/`
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const fetchJobs = async () => {
     try {
-        const response = await axios.get(BASE_URL);
+        const response = await axios.get(`${BASE_URL}/api/workflow/`,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         return response.data
-    } catch (e) {
-        console.log('Error:', e);
+    } catch (err) {
+        console.log('Error:', err);
     }
 };
 
